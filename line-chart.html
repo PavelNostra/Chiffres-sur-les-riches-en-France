@@ -9,15 +9,21 @@
     body {
       font-family: 'Montserrat', Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 20px;
+      text-align: center;
       color: #333;
     }
 
-    /* Pour garantir que l'iframe prend toute la place */
-    iframe {
-      width: 100vw; /* Largeur égale à 100% de la largeur de la fenêtre */
-      height: 100vh; /* Hauteur égale à 100% de la hauteur de la fenêtre */
-      border: none; /* Supprimer la bordure de l'iframe */
+    iframe{
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
+
+    #lineChart {
+      max-width: 90%;
+      height: 500px; /* Taille agrandie */
+      margin: 20px auto;
     }
 
     .description {
@@ -84,25 +90,27 @@
     }
   </style>
 </head>
-<body>
-  <!-- L'iframe ici -->
-  <iframe src="https://pavelnostra.github.io/Chiffres-sur-les-riches-en-France/line-chart.html" title="Evolution des riches en France"></iframe>
+<body overflow:hidden >
+  <h1>Evolution du nombre de riches en France</h1>
 
-  <!-- Bouton pour afficher ou masquer des informations supplémentaires -->
+  <canvas id="lineChart"></canvas>
+
   <button id="toggle-button">En savoir plus</button>
   <div class="description" id="description">
     <h1>2021 = 4,7 millions de riches = 7,4% de la population</h1>
-    <p>L'Observatoire des inégalités propose deux explications aux baisse 1 & 2 :</p>
-    <ul>
-      <li>
-        <strong>Baisse 1</strong> due aux réformes fiscales de Sarkozy puis d’Hollande, ayant « affecté les hauts revenus et les propriétaires d’actions notamment ».
-      </li>
-      <li>
-        <strong>Baisse 2</strong> due à la prime d’activité allouée aux travailleurs modestes. Les gilets jaunes l’avaient obtenue. Alors, elle a permis aux classes moyennes de gagner en niveau de vie, ce qui a augmenté le niveau de vie médian, donc le seuil de richesse. Mathématiquement, ils sont donc moins nombreux.
-      </li>
-    </ul>
+  <p>L'Observatoire des inégalités propose deux explications aux baisse 1 & 2 :</p>
+  <ul>
+    <li>
+      <strong>Baisse 1</strong> due aux réformes fiscales de Sarkozy puis d’Hollande, ayant « affecté les hauts revenus et les propriétaires d’actions notamment ».
+    </li>
+    <li>
+      <strong>Baisse 2</strong> due à la prime d’activité allouée aux travailleurs modestes. Les gilets jaunes l’avaient obtenue. Alors, elle a permis aux classes moyennes de gagner en niveau de vie, ce qui a augmenté le niveau de vie médian, donc le seuil de richesse. Mathématiquement, ils sont donc moins nombreux.
+    </li>
+  </ul>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script>
     const button = document.getElementById('toggle-button');
     const description = document.getElementById('description');
@@ -121,6 +129,68 @@
         button.textContent = 'Réduire';
         button.classList.add('small');
       }
+    });
+
+    const lineCtx = document.getElementById('lineChart');
+    new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021'],
+        datasets: [{
+          label: 'Milliers',
+          data: [5198, 5509, 5326, 4997, 4842, 4950, 4891, 4929, 4965, 4742, 4351, 4725],
+          borderColor: '#542b6c',
+          backgroundColor: '#542b6c',
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                family: 'Montserrat',
+                size: 14
+              },
+              color: '#333'
+            }
+          },
+          datalabels: {
+            color: 'black',
+            font: {
+              family: 'Montserrat',
+              size: 12
+            },
+            anchor: 'end',
+            align: 'top',
+            formatter: function(value) {
+              return value;
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 4000,
+            ticks: {
+              font: {
+                family: 'Montserrat'
+              },
+              color: '#333'
+            }
+          },
+          x: {
+            ticks: {
+              font: {
+                family: 'Montserrat'
+              },
+              color: '#333'
+            }
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
     });
   </script>
 </body>
