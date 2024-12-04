@@ -6,20 +6,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>Evolution du nombre de riches en France</title>
   <style>
+    /* Styles généraux */
     body {
       font-family: 'Montserrat', Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       text-align: center;
       color: #333;
+      overflow: hidden; /* Empêche le scroll */
     }
 
+    /* Conteneur du canvas */
     #lineChart {
       max-width: 90%;
-      height: 500px;
+      height: 60vh; /* Ajusté pour s'adapter à la hauteur de l'écran */
       margin: 20px auto;
     }
 
+    /* Bouton de bascule */
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #542b6c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+
+    button:hover {
+      background-color: #764296;
+    }
+
+    button.small {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    /* Description masquée */
     .description {
       display: none;
       margin-top: 10px;
@@ -35,8 +62,11 @@
       transform: translateY(0);
     }
 
-    button {
-      margin-top: 20px;
+    /* Bouton plein écran */
+    .fullscreen-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
       padding: 10px 20px;
       font-size: 16px;
       background-color: #542b6c;
@@ -44,43 +74,12 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'Montserrat', Arial, sans-serif;
+      z-index: 1000;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     }
 
-    button:hover {
-      background-color: #432051;
-    }
-
-    button.small {
-      padding: 5px 10px;
-      font-size: 14px;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    p, ul {
-      text-align: justify;
-    }
-
-    p {
-      font-size: 16px;
-      font-weight: 400;
-      margin-bottom: 10px;
-    }
-
-    ul {
-      list-style-type: disc;
-      margin: 10px 0 0 20px;
-    }
-
-    ul li {
-      margin-bottom: 8px;
-      font-size: 16px;
+    .fullscreen-button:hover {
+      background-color: #764296;
     }
   </style>
 </head>
@@ -89,31 +88,27 @@
 
   <canvas id="lineChart"></canvas>
 
+  <!-- Bouton pour afficher/masquer la description -->
   <button id="toggle-button">En savoir plus</button>
-  <button id="fullscreen-button">Plein écran</button>
-
   <div class="description" id="description">
     <h1>2021 = 4,7 millions de riches = 7,4% de la population</h1>
-    <p>L'Observatoire des inégalités propose deux explications aux baisse 1 & 2 :</p>
+    <p>L'Observatoire des inégalités propose deux explications aux baisses :</p>
     <ul>
-      <li>
-        <strong>Baisse 1</strong> due aux réformes fiscales de Sarkozy puis d’Hollande, ayant « affecté les hauts revenus et les propriétaires d’actions notamment ».
-      </li>
-      <li>
-        <strong>Baisse 2</strong> due à la prime d’activité allouée aux travailleurs modestes. Les gilets jaunes l’avaient obtenue. Alors, elle a permis aux classes moyennes de gagner en niveau de vie, ce qui a augmenté le niveau de vie médian, donc le seuil de richesse. Mathématiquement, ils sont donc moins nombreux.
-      </li>
+      <li><strong>Baisse 1</strong> due aux réformes fiscales de Sarkozy puis d’Hollande, ayant « affecté les hauts revenus et les propriétaires d’actions notamment ».</li>
+      <li><strong>Baisse 2</strong> due à la prime d’activité allouée aux travailleurs modestes. Les gilets jaunes l’avaient obtenue. Alors, elle a permis aux classes moyennes de gagner en niveau de vie, ce qui a augmenté le niveau de vie médian, donc le seuil de richesse. Mathématiquement, ils sont donc moins nombreux.</li>
     </ul>
   </div>
+
+  <!-- Bouton plein écran -->
+  <button class="fullscreen-button" onclick="goFullScreen()">Plein écran</button>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script>
+    // Gestion de la description
     const button = document.getElementById('toggle-button');
-    const fullscreenButton = document.getElementById('fullscreen-button');
     const description = document.getElementById('description');
-    
 
-    // Bouton "En savoir plus"
     button.addEventListener('click', () => {
       if (description.classList.contains('show')) {
         description.classList.remove('show');
@@ -130,29 +125,7 @@
       }
     });
 
-    // Bouton "Plein écran"
-    fullscreenButton.addEventListener('click', () => {
-    // Vérifie si l'API est disponible
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-      document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) { // Safari/Chrome
-      document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-      document.documentElement.msRequestFullscreen();
-    } else {
-      alert("Votre navigateur ne prend pas en charge le mode plein écran.");
-    }
-  });
-
-  // Gestion d'erreurs pour certains navigateurs
-  document.addEventListener('fullscreenerror', (e) => {
-    console.error("Erreur en entrant en plein écran :", e);
-    alert("Impossible d'activer le mode plein écran.");
-  });
-
-    // Graphique
+    // Initialisation du graphique
     const lineCtx = document.getElementById('lineChart');
     new Chart(lineCtx, {
       type: 'line',
@@ -214,6 +187,19 @@
       },
       plugins: [ChartDataLabels]
     });
+
+    // Fonction plein écran
+    function goFullScreen() {
+      if (document.body.requestFullscreen) {
+        document.body.requestFullscreen();
+      } else if (document.body.mozRequestFullScreen) { /* Firefox */
+        document.body.mozRequestFullScreen();
+      } else if (document.body.webkitRequestFullscreen) { /* Chrome, Safari et Opera */
+        document.body.webkitRequestFullscreen();
+      } else if (document.body.msRequestFullscreen) { /* IE/Edge */
+        document.body.msRequestFullscreen();
+      }
+    }
   </script>
 </body>
 </html>
