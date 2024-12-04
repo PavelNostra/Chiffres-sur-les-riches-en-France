@@ -6,24 +6,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>Evolution du nombre de riches en France</title>
   <style>
-    /* Styles généraux */
     body {
       font-family: 'Montserrat', Arial, sans-serif;
       margin: 0;
       padding: 0;
       text-align: center;
       color: #333;
-      overflow: hidden; /* Empêche le scroll */
+      overflow: hidden;
     }
 
-    /* Conteneur du canvas */
     #lineChart {
       max-width: 90%;
       height: 60vh; /* Ajusté pour s'adapter à la hauteur de l'écran */
       margin: 20px auto;
     }
 
-    /* Bouton de bascule */
     button {
       margin-top: 20px;
       padding: 10px 20px;
@@ -46,7 +43,6 @@
       font-size: 14px;
     }
 
-    /* Description masquée */
     .description {
       display: none;
       margin-top: 10px;
@@ -62,7 +58,6 @@
       transform: translateY(0);
     }
 
-    /* Bouton plein écran */
     .fullscreen-button {
       position: fixed;
       bottom: 20px;
@@ -75,7 +70,6 @@
       border-radius: 5px;
       cursor: pointer;
       z-index: 1000;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     }
 
     .fullscreen-button:hover {
@@ -190,14 +184,15 @@
 
     // Fonction plein écran
     function goFullScreen() {
-      if (document.body.requestFullscreen) {
-        document.body.requestFullscreen();
-      } else if (document.body.mozRequestFullScreen) { /* Firefox */
-        document.body.mozRequestFullScreen();
-      } else if (document.body.webkitRequestFullscreen) { /* Chrome, Safari et Opera */
-        document.body.webkitRequestFullscreen();
-      } else if (document.body.msRequestFullscreen) { /* IE/Edge */
-        document.body.msRequestFullscreen();
+      // Tentative d'entrer en mode plein écran pour le document
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari et Opera */
+        document.documentElement.webkitRequestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+        document.documentElement.msRequestFullscreen();
       }
     }
   </script>
