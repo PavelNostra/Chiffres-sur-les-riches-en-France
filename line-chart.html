@@ -9,38 +9,21 @@
     body {
       font-family: 'Montserrat', Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 20px;
       text-align: center;
       color: #333;
-      overflow: hidden;
+    }
+
+    iframe{
+      width: 100vw;
+      height: 100vh;
+      border: none;
     }
 
     #lineChart {
       max-width: 90%;
-      height: 60vh; /* Ajusté pour s'adapter à la hauteur de l'écran */
+      height: 500px; /* Taille agrandie */
       margin: 20px auto;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #542b6c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'Montserrat', Arial, sans-serif;
-    }
-
-    button:hover {
-      background-color: #764296;
-    }
-
-    button.small {
-      padding: 5px 10px;
-      font-size: 14px;
     }
 
     .description {
@@ -58,10 +41,8 @@
       transform: translateY(0);
     }
 
-    .fullscreen-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
+    button {
+      margin-top: 20px;
       padding: 10px 20px;
       font-size: 16px;
       background-color: #542b6c;
@@ -69,37 +50,68 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      z-index: 1000;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', Arial, sans-serif;
     }
 
-    .fullscreen-button:hover {
-      background-color: #764296;
+    button:hover {
+      background-color: #542b6c;
+    }
+
+    button.small {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    p, ul{
+      text-align: justify;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin: 10px 0 0 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+      font-size: 16px;
     }
   </style>
 </head>
-<body>
+<body overflow:hidden >
   <h1>Evolution du nombre de riches en France</h1>
 
   <canvas id="lineChart"></canvas>
 
-  <!-- Bouton pour afficher/masquer la description -->
   <button id="toggle-button">En savoir plus</button>
   <div class="description" id="description">
     <h1>2021 = 4,7 millions de riches = 7,4% de la population</h1>
-    <p>L'Observatoire des inégalités propose deux explications aux baisses :</p>
-    <ul>
-      <li><strong>Baisse 1</strong> due aux réformes fiscales de Sarkozy puis d’Hollande, ayant « affecté les hauts revenus et les propriétaires d’actions notamment ».</li>
-      <li><strong>Baisse 2</strong> due à la prime d’activité allouée aux travailleurs modestes. Les gilets jaunes l’avaient obtenue. Alors, elle a permis aux classes moyennes de gagner en niveau de vie, ce qui a augmenté le niveau de vie médian, donc le seuil de richesse. Mathématiquement, ils sont donc moins nombreux.</li>
-    </ul>
+  <p>L'Observatoire des inégalités propose deux explications aux baisse 1 & 2 :</p>
+  <ul>
+    <li>
+      <strong>Baisse 1</strong> due aux réformes fiscales de Sarkozy puis d’Hollande, ayant « affecté les hauts revenus et les propriétaires d’actions notamment ».
+    </li>
+    <li>
+      <strong>Baisse 2</strong> due à la prime d’activité allouée aux travailleurs modestes. Les gilets jaunes l’avaient obtenue. Alors, elle a permis aux classes moyennes de gagner en niveau de vie, ce qui a augmenté le niveau de vie médian, donc le seuil de richesse. Mathématiquement, ils sont donc moins nombreux.
+    </li>
+  </ul>
   </div>
-
-  <!-- Bouton plein écran -->
-  <button class="fullscreen-button" onclick="goFullScreen()">Plein écran</button>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script>
-    // Gestion de la description
     const button = document.getElementById('toggle-button');
     const description = document.getElementById('description');
 
@@ -119,7 +131,6 @@
       }
     });
 
-    // Initialisation du graphique
     const lineCtx = document.getElementById('lineChart');
     new Chart(lineCtx, {
       type: 'line',
@@ -135,6 +146,7 @@
       },
       options: {
         responsive: true,
+        
         plugins: {
           legend: {
             labels: {
@@ -181,20 +193,6 @@
       },
       plugins: [ChartDataLabels]
     });
-
-    // Fonction plein écran
-    function goFullScreen() {
-      // Tentative d'entrer en mode plein écran pour le document
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-      } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
-        document.documentElement.mozRequestFullScreen();
-      } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari et Opera */
-        document.documentElement.webkitRequestFullscreen();
-      } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
-        document.documentElement.msRequestFullscreen();
-      }
-    }
   </script>
 </body>
 </html>
