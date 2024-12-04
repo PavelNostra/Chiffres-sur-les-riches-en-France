@@ -14,7 +14,7 @@
       color: #333;
     }
 
-    iframe {
+    iframe{
       width: 100vw;
       height: 100vh;
       border: none;
@@ -69,7 +69,7 @@
       margin-bottom: 20px;
     }
 
-    p, ul {
+    p, ul{
       text-align: justify;
     }
 
@@ -88,47 +88,9 @@
       margin-bottom: 8px;
       font-size: 16px;
     }
-
-    /* Style pour la modale */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    .modal-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      width: 90%;
-      height: 90%;
-      border-radius: 8px;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 30px;
-      color: #333;
-      cursor: pointer;
-    }
   </style>
 </head>
-<body>
+<body overflow:hidden >
   <h1>Evolution du nombre de riches en France</h1>
 
   <canvas id="lineChart"></canvas>
@@ -136,26 +98,15 @@
   <button id="toggle-button">En savoir plus</button>
   <div class="description" id="description">
     <h1>2021 = 4,7 millions de riches = 7,4% de la population</h1>
-    <p>L'Observatoire des inégalités propose deux explications aux baisse 1 & 2 :</p>
-    <ul>
-      <li>
-        <strong>Baisse 1</strong> due aux réformes fiscales de Sarkozy puis d’Hollande, ayant « affecté les hauts revenus et les propriétaires d’actions notamment ».
-      </li>
-      <li>
-        <strong>Baisse 2</strong> due à la prime d’activité allouée aux travailleurs modestes. Les gilets jaunes l’avaient obtenue. Alors, elle a permis aux classes moyennes de gagner en niveau de vie, ce qui a augmenté le niveau de vie médian, donc le seuil de richesse. Mathématiquement, ils sont donc moins nombreux.
-      </li>
-    </ul>
-  </div>
-
-  <!-- Bouton pour ouvrir la modale -->
-  <button id="openModalButton">Voir en grand</button>
-
-  <!-- La modale -->
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span id="closeModal" class="close">&times;</span>
-      <iframe src="https://pavelnostra.github.io/Chiffres-sur-les-riches-en-France/line-chart.html" id="iframeContent"></iframe>
-    </div>
+  <p>L'Observatoire des inégalités propose deux explications aux baisse 1 & 2 :</p>
+  <ul>
+    <li>
+      <strong>Baisse 1</strong> due aux réformes fiscales de Sarkozy puis d’Hollande, ayant « affecté les hauts revenus et les propriétaires d’actions notamment ».
+    </li>
+    <li>
+      <strong>Baisse 2</strong> due à la prime d’activité allouée aux travailleurs modestes. Les gilets jaunes l’avaient obtenue. Alors, elle a permis aux classes moyennes de gagner en niveau de vie, ce qui a augmenté le niveau de vie médian, donc le seuil de richesse. Mathématiquement, ils sont donc moins nombreux.
+    </li>
+  </ul>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -180,27 +131,6 @@
       }
     });
 
-    // Modale
-    const openModalButton = document.getElementById('openModalButton');
-    const modal = document.getElementById('myModal');
-    const closeModal = document.getElementById('closeModal');
-
-    openModalButton.addEventListener('click', function() {
-      modal.style.display = 'block';
-    });
-
-    closeModal.addEventListener('click', function() {
-      modal.style.display = 'none';
-    });
-
-    // Fermer la modale si on clique en dehors
-    window.addEventListener('click', function(event) {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-
-    // Création du graphique
     const lineCtx = document.getElementById('lineChart');
     new Chart(lineCtx, {
       type: 'line',
@@ -216,6 +146,7 @@
       },
       options: {
         responsive: true,
+        
         plugins: {
           legend: {
             labels: {
