@@ -13,38 +13,38 @@
       text-align: center;
       color: #333;
     }
-
-    iframe{
+  
+    iframe {
       width: 100vw;
       height: 100vh;
       border: none;
     }
-
+  
     #lineChart {
       max-width: 90%;
-      height: 500px; /* Taille agrandie */
+      height: 50vh; /* Utilise une hauteur relative à la taille de la fenêtre */
       margin: 20px auto;
     }
-
+  
     .description {
       display: none;
       margin-top: 10px;
-      font-size: 14px;
+      font-size: 1rem; /* Adapté avec des unités relatives */
       opacity: 0;
       transition: opacity 0.5s ease, transform 0.5s ease;
       transform: translateY(-10px);
     }
-
+  
     .description.show {
       display: block;
       opacity: 1;
       transform: translateY(0);
     }
-
+  
     button {
       margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 1rem 2rem; /* Adapté avec des unités relatives */
+      font-size: 1rem;
       background-color: #542b6c;
       color: white;
       border: none;
@@ -53,42 +53,61 @@
       transition: all 0.3s ease;
       font-family: 'Montserrat', Arial, sans-serif;
     }
-
+  
     button:hover {
-      background-color: #542b6c;
+      background-color: #3b1f4f;
     }
-
+  
     button.small {
-      padding: 5px 10px;
-      font-size: 14px;
+      padding: 0.5rem 1rem; /* Adapté avec des unités relatives */
+      font-size: 0.9rem;
     }
-
+  
     h1 {
-      font-size: 28px;
+      font-size: 3vw; /* Adapté à la largeur de la fenêtre */
       font-weight: 700;
       margin-bottom: 20px;
     }
-
-    p, ul{
+  
+    p, ul {
       text-align: justify;
+      font-size: 1rem;
     }
-
-    p {
-      font-size: 16px;
-      font-weight: 400;
-      margin-bottom: 10px;
-    }
-
+  
     ul {
       list-style-type: disc;
-      margin: 10px 0 0 20px;
+      margin: 10px 0 0 5%;
+      padding-left: 5%; /* Ajoute une marge pour un meilleur alignement */
     }
-
+  
     ul li {
       margin-bottom: 8px;
-      font-size: 16px;
+    }
+  
+    /* Média queries pour les petites et très grandes tailles d'écran */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 6vw; /* Texte plus grand sur les petits écrans */
+      }
+      p, ul {
+        font-size: 0.9rem; /* Réduction des polices pour économiser l'espace */
+      }
+      button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+      }
+    }
+  
+    @media (min-width: 1200px) {
+      h1 {
+        font-size: 2.5vw; /* Limiter la taille excessive du texte */
+      }
+      p, ul {
+        font-size: 1.2rem; /* Plus lisible sur les grands écrans */
+      }
     }
   </style>
+  
 </head>
 <body overflow:hidden >
   <h1>Evolution du nombre de riches en France</h1>
