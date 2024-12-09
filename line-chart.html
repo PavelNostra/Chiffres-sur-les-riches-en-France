@@ -16,15 +16,14 @@
 
     #chart-container {
       width: 100%;
-      height: 80vh; /* Utiliser 80% de la hauteur de la fenêtre */
-      max-height: 600px; /* Limiter la hauteur maximale */
+      height: 50vh; /* Le conteneur prend 50% de la hauteur de l'écran */
       margin: 20px auto;
-      overflow: hidden; /* Empêche tout débordement */
+      overflow: hidden;
     }
 
     #lineChart {
       max-width: 100%; /* Limite la largeur */
-      height: 100%; /* Utilise toute la hauteur disponible dans le conteneur */
+      height: 100%; /* Utilise toute la hauteur du conteneur */
     }
 
     .description {
@@ -98,10 +97,6 @@
         padding: 0.8rem 1.5rem;
         font-size: 0.9rem;
       }
-
-      #chart-container {
-        height: 50vh; /* Augmente la hauteur du graphique sur les petits écrans */
-      }
     }
 
     @media (min-width: 1200px) {
@@ -115,7 +110,7 @@
     }
   </style>
 </head>
-<body overflow:hidden>
+<body>
   <h1>Evolution du nombre de riches en France</h1>
 
   <div id="chart-container">
