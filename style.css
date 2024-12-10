@@ -14,14 +14,6 @@ body {
     border
 }
 
-.styled-iframe {
-    border: 4px solid #ff69b4; /* Couleur rose pour le contour */
-    border-radius: 15px; /* Angles arrondis */
-    padding: 5px; /* Optionnel : espace autour de l'iframe */
-    box-sizing: border-box; /* Inclut le padding et la bordure dans les dimensions */
-  }
-
-
 .content {
     width: 100%;
     height: 100%;
