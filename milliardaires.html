@@ -111,26 +111,34 @@
   </style>
 </head>
 <body>
-  <h1>Evolution du nombre de riches en France</h1>
+  <h1>Evolution de la fortune de quelques milliardaires français</h1>
 
   <div id="chart-container">
     <canvas id="lineChart"></canvas>
   </div>
   
   <p> 
-    Source : estimations de l'Observatoire des inégalités, d'après l'Insee - Observatoire des inégalités
+    Source : Challenges
   </p>
   
   <button id="toggle-button">En savoir plus</button>
   <div class="description" id="description">
-    <h1>2021 = 4,7 millions de riches = 7,4% de la population</h1>
-    <p>L'Observatoire des inégalités propose deux explications aux baisses 1 (2011-2014) & 2 (2018-2020) :</p>
+    <p>Entre 2016 et 2024, on observe donc une hausse, en %, de :</p>
     <ul>
       <li>
-        <strong>Baisse 1</strong> due aux réformes fiscales de Sarkozy puis d’Hollande, ayant « affecté les hauts revenus et les propriétaires d’actions notamment ».
+        <strong>627 %</strong> pour la famille Arnault.
       </li>
       <li>
-        <strong>Baisse 2</strong> due à la prime d’activité allouée aux travailleurs modestes. Les gilets jaunes l’avaient obtenue. Alors, elle a permis aux classes moyennes de gagner en niveau de vie, ce qui a augmenté le niveau de vie médian, donc le seuil de richesse. Mathématiquement, ils sont donc moins nombreux.
+        <strong>695 %</strong> pour la famille Hermès.
+      </li>
+      <li>
+        <strong>697 %</strong> pour la famille Wertheimer.
+      </li>
+      <li>
+        <strong>270 %</strong> pour la famille Bettencourt Meyers.
+      </li>
+      <li>
+        <strong>209 %</strong> pour la famille Pinault.
       </li>
     </ul>
   </div>
@@ -161,13 +169,41 @@
     new Chart(lineCtx, {
       type: 'line',
       data: {
-        labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021'],
+        labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
         datasets: [{
-          label: 'Milliers',
-          data: [5198, 5509, 5326, 4997, 4842, 4950, 4891, 4929, 4965, 4742, 4351, 4725],
+          label: 'Famille Arnault',
+          data: [30.33, 46.9, 73.2, 88.3, 100, 157.5, 149, 203, 190.3],
           borderColor: '#542b6c',
-          backgroundColor: '#542b6c',
-          tension: 0.4
+          backgroundColor: '#e8dff2',
+          tension: 0
+        },
+        {
+          label: 'Famille Hermès',
+          data: [22.3, 30.85, 39.6, 43, 55.5, 81.5, 78.7, 137.8, 155],
+          borderColor: '#ff7f0e',
+          backgroundColor: '#ffe6d0',
+          tension: 0
+        },
+        {
+          label: 'Famille Wertheimer',
+          data: [16.5, 21, 40, 50, 53, 67, 80, 100, 115],
+          borderColor: '#2ca02c',
+          backgroundColor: '#d9f2d9',
+          tension: 0
+        },
+        {
+          label: 'Famille Bettencourt Meyers',
+          data: [31.2, 35.8, 39.3, 45.8, 51, 71.4, 62.4, 77.2, 84.1],
+          borderColor: '#d62728',
+          backgroundColor: '#f9d6d6',
+          tension: 0
+        },
+        {
+          label: 'Famille Pinault',
+          data: [11.3, 19, 30.5, 29, 32, 41.5, 30.9, 31.2, 23.6],
+          borderColor: '#1f77b4',
+          backgroundColor: '#d4e7f9',
+          tension: 0
         }]
       },
       options: {
@@ -191,15 +227,16 @@
             },
             anchor: 'end',
             align: 'top',
-            formatter: function(value) {
-              return value;
+            formatter: function(value, context) {
+              const dataset = context.dataset.data;
+                return context.dataIndex === dataset.length - 1 ? value : null;
             }
           }
         },
         scales: {
           y: {
             beginAtZero: false,
-            min: 4000,
+            min: 0,
             ticks: {
               font: {
                 family: 'Montserrat'

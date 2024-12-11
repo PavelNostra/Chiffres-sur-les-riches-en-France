@@ -118,21 +118,13 @@
   </div>
   
   <p> 
-    Source : estimations de l'Observatoire des inégalités, d'après l'Insee - Observatoire des inégalités
+    Source : Challenges
   </p>
   
   <button id="toggle-button">En savoir plus</button>
   <div class="description" id="description">
-    <h1>2021 = 4,7 millions de riches = 7,4% de la population</h1>
-    <p>L'Observatoire des inégalités propose deux explications aux baisses 1 (2011-2014) & 2 (2018-2020) :</p>
-    <ul>
-      <li>
-        <strong>Baisse 1</strong> due aux réformes fiscales de Sarkozy puis d’Hollande, ayant « affecté les hauts revenus et les propriétaires d’actions notamment ».
-      </li>
-      <li>
-        <strong>Baisse 2</strong> due à la prime d’activité allouée aux travailleurs modestes. Les gilets jaunes l’avaient obtenue. Alors, elle a permis aux classes moyennes de gagner en niveau de vie, ce qui a augmenté le niveau de vie médian, donc le seuil de richesse. Mathématiquement, ils sont donc moins nombreux.
-      </li>
-    </ul>
+    <h1>On observe une augmentation de 215 % entre 2017 et 2024</h1>
+    
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -161,13 +153,13 @@
     new Chart(lineCtx, {
       type: 'line',
       data: {
-        labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021'],
+        labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
         datasets: [{
-          label: 'Milliers',
-          data: [5198, 5509, 5326, 4997, 4842, 4950, 4891, 4929, 4965, 4742, 4351, 4725],
+          label: '500 plus grosses fortunes',
+          data: [571, 650, 711, 731, 953, 1002, 1170, 1228],
           borderColor: '#542b6c',
-          backgroundColor: '#542b6c',
-          tension: 0.4
+          backgroundColor: '#e8dff2',
+          tension: 0
         }]
       },
       options: {
@@ -199,7 +191,7 @@
         scales: {
           y: {
             beginAtZero: false,
-            min: 4000,
+            min: 400,
             ticks: {
               font: {
                 family: 'Montserrat'
