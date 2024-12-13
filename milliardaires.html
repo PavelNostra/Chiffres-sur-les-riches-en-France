@@ -111,16 +111,15 @@
   </style>
 </head>
 <body>
-  
 
   <div id="chart-container">
     <canvas id="lineChart"></canvas>
   </div>
-  
+
   <p> 
     Source : Challenges
   </p>
-  
+
   <button id="toggle-button">En savoir plus</button>
   <div class="description" id="description">
     <p>Entre 2016 et 2024, on observe donc une hausse, en %, de :</p>
@@ -211,13 +210,16 @@
         maintainAspectRatio: false,
         plugins: {
           legend: {
+            position: 'bottom', // Place les légendes en bas
             labels: {
               font: {
                 family: 'Montserrat',
-                size: 10 // Réduction de la taille des légendes
+                size: 12
               },
-              color: '#333'
-            }
+              color: '#333',
+              padding: 20 // Espacement entre les légendes
+            },
+            align: 'center' // Centre les légendes
           },
           datalabels: {
             color: 'black',
