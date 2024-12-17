@@ -229,12 +229,16 @@
             font: {
               family: 'Montserrat',
               size: 12
+            
             },
+            
             anchor: 'end',
             align: 'top',
+            offset : -5,
             formatter: function(value, context) {
               const dataset = context.dataset.data;
               return context.dataIndex === dataset.length - 1 ? value : null;
+              
             }
           }
         },
