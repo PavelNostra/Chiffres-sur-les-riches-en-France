@@ -4,163 +4,111 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href = style.css />
-  <title>Evolution du nombre de riches en France</title>
+  <link rel="stylesheet" href="style.css" />
+  <title>Evolution des fortunes en France</title>
 </head>
 <body>
-  <div class="numero-graphique">
-    1/4
-  </div>
-  <h1>
-    Evolution de la fortune de quelques familles françaises
-  </h1>
-  
-  <div id="chart-container">
-    <canvas id="lineChart"></canvas>
-  </div>
-  <div class="cssFont_1" style="font-family:'Montserrat', sans-serif">Source : Challenges</div>
+  <!-- Navigation entre les sections -->
+  <nav>
+    <button onclick="showSection('section1')">Graphique 1</button>
+    <button onclick="showSection('section2')">Graphique 2</button>
+  </nav>
 
+  <!-- Section 1 -->
+  <section id="section1" class="content-section">
+    <div class="numero-graphique">1/2</div>
+    <h1>Evolution de la fortune de quelques familles françaises</h1>
+    <div id="chart-container">
+      <canvas id="lineChart1"></canvas>
+    </div>
+    <div class="cssFont_1" style="font-family:'Montserrat', sans-serif">Source : Challenges</div>
+    <button id="toggle-button1">En savoir plus</button>
+    <div class="description" id="description1">
+      <p>Entre 2016 et 2024, on observe donc une hausse, en %, de :</p>
+      <ul>
+        <li><strong>627 %</strong> pour la famille Arnault.</li>
+        <li><strong>695 %</strong> pour la famille Hermès.</li>
+        <li><strong>697 %</strong> pour la famille Wertheimer.</li>
+        <li><strong>270 %</strong> pour la famille Bettencourt Meyers.</li>
+        <li><strong>209 %</strong> pour la famille Pinault.</li>
+      </ul>
+    </div>
+  </section>
 
-  <button id="toggle-button">En savoir plus</button>
-  <div class="description" id="description">
-    <p>Entre 2016 et 2024, on observe donc une hausse, en %, de :</p>
-    <ul>
-      <li>
-        <strong>627 %</strong> pour la famille Arnault.
-      </li>
-      <li>
-        <strong>695 %</strong> pour la famille Hermès.
-      </li>
-      <li>
-        <strong>697 %</strong> pour la famille Wertheimer.
-      </li>
-      <li>
-        <strong>270 %</strong> pour la famille Bettencourt Meyers.
-      </li>
-      <li>
-        <strong>209 %</strong> pour la famille Pinault.
-      </li>
-    </ul>
-  </div>
+  <!-- Section 2 -->
+  <section id="section2" class="content-section" style="display:none;">
+    <div class="numero-graphique">2/2</div>
+    <h1>Evolution du nombre de riches en France</h1>
+    <div id="chart-container">
+      <canvas id="lineChart2"></canvas>
+    </div>
+    <div class="cssFont_1" style="font-family:'Montserrat', sans-serif">Source : Challenges</div>
+    <button id="toggle-button2">En savoir plus</button>
+    <div class="description" id="description2">
+      <h1>On observe une augmentation de 215 % entre 2017 et 2024</h1>
+    </div>
+  </section>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script>
-    const button = document.getElementById('toggle-button');
-    const description = document.getElementById('description');
+    // Fonction de navigation entre les sections
+    function showSection(id) {
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.getElementById(id).style.display = 'block';
+    }
 
-    button.addEventListener('click', () => {
-      if (description.classList.contains('show')) {
-        description.classList.remove('show');
-        setTimeout(() => {
-          description.style.display = 'none';
-        }, 500);
-        button.textContent = 'En savoir plus';
-        button.classList.remove('small');
-      } else {
-        description.style.display = 'block';
-        setTimeout(() => description.classList.add('show'), 10);
-        button.textContent = 'Réduire';
-        button.classList.add('small');
-      }
-    });
+    // Gestion des descriptions
+    function toggleDescription(buttonId, descriptionId) {
+      const button = document.getElementById(buttonId);
+      const description = document.getElementById(descriptionId);
 
-    const lineCtx = document.getElementById('lineChart');
-    new Chart(lineCtx, {
+      button.addEventListener('click', () => {
+        if (description.classList.contains('show')) {
+          description.classList.remove('show');
+          setTimeout(() => {
+            description.style.display = 'none';
+          }, 500);
+          button.textContent = 'En savoir plus';
+        } else {
+          description.style.display = 'block';
+          setTimeout(() => description.classList.add('show'), 10);
+          button.textContent = 'Réduire';
+        }
+      });
+    }
+    toggleDescription('toggle-button1', 'description1');
+    toggleDescription('toggle-button2', 'description2');
+
+    // Graphique 1
+    const lineCtx1 = document.getElementById('lineChart1');
+    new Chart(lineCtx1, {
       type: 'line',
       data: {
         labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-        datasets: [{
-          label: 'Famille Arnault',
-          data: [30.33, 46.9, 73.2, 88.3, 100, 157.5, 149, 203, 190.3],
-          borderColor: '#542b6c',
-          backgroundColor: '#e8dff2',
-          tension: 0
-        },
-        {
-          label: 'Famille Hermès',
-          data: [22.3, 30.85, 39.6, 43, 55.5, 81.5, 78.7, 137.8, 155],
-          borderColor: '#ff7f0e',
-          backgroundColor: '#ffe6d0',
-          tension: 0
-        },
-        {
-          label: 'Famille Wertheimer',
-          data: [16.5, 21, 40, 50, 53, 67, 80, 100, 115],
-          borderColor: '#2ca02c',
-          backgroundColor: '#d9f2d9',
-          tension: 0
-        },
-        {
-          label: 'Famille Bettencourt Meyers',
-          data: [31.2, 35.8, 39.3, 45.8, 51, 71.4, 62.4, 77.2, 84.1],
-          borderColor: '#d62728',
-          backgroundColor: '#f9d6d6',
-          tension: 0
-        },
-        {
-          label: 'Famille Pinault',
-          data: [11.3, 19, 30.5, 29, 32, 41.5, 30.9, 31.2, 23.6],
-          borderColor: '#1f77b4',
-          backgroundColor: '#d4e7f9',
-          tension: 0
-        }]
+        datasets: [
+          { label: 'Famille Arnault', data: [30.33, 46.9, 73.2, 88.3, 100, 157.5, 149, 203, 190.3], borderColor: '#542b6c', backgroundColor: '#e8dff2', tension: 0 },
+          { label: 'Famille Hermès', data: [22.3, 30.85, 39.6, 43, 55.5, 81.5, 78.7, 137.8, 155], borderColor: '#ff7f0e', backgroundColor: '#ffe6d0', tension: 0 },
+          { label: 'Famille Wertheimer', data: [16.5, 21, 40, 50, 53, 67, 80, 100, 115], borderColor: '#2ca02c', backgroundColor: '#d9f2d9', tension: 0 },
+          { label: 'Famille Bettencourt Meyers', data: [31.2, 35.8, 39.3, 45.8, 51, 71.4, 62.4, 77.2, 84.1], borderColor: '#d62728', backgroundColor: '#f9d6d6', tension: 0 },
+          { label: 'Famille Pinault', data: [11.3, 19, 30.5, 29, 32, 41.5, 30.9, 31.2, 23.6], borderColor: '#1f77b4', backgroundColor: '#d4e7f9', tension: 0 }
+        ]
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'bottom', // Place les légendes en bas
-            labels: {
-              font: {
-                family: 'Montserrat',
-                size: 10
-              },
-              color: '#333',
-              padding: 10 // Espacement entre les légendes
-            },
-            align: 'start' // Centre les légendes
-          },
-          datalabels: {
-            color: 'black',
-            font: {
-              family: 'Montserrat',
-              size: 12
-            
-            },
-            
-            anchor: 'end',
-            align: 'top',
-            offset : -5,
-            formatter: function(value, context) {
-              const dataset = context.dataset.data;
-              return context.dataIndex === dataset.length - 1 ? value : null;
-              
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: false,
-            min: 0,
-            ticks: {
-              font: {
-                family: 'Montserrat'
-              },
-              color: '#333'
-            }
-          },
-          x: {
-            ticks: {
-              font: {
-                family: 'Montserrat'
-              },
-              color: '#333'
-            }
-          }
-        }
+      options: { /* options */ },
+      plugins: [ChartDataLabels]
+    });
+
+    // Graphique 2
+    const lineCtx2 = document.getElementById('lineChart2');
+    new Chart(lineCtx2, {
+      type: 'line',
+      data: {
+        labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+        datasets: [{ label: 'milliards', data: [571, 650, 711, 731, 953, 1002, 1170, 1228], borderColor: '#542b6c', backgroundColor: '#e8dff2', tension: 0 }]
       },
+      options: { /* options */ },
       plugins: [ChartDataLabels]
     });
   </script>
