@@ -8,13 +8,18 @@
   <title>Evolution des fortunes en France</title>
 </head>
 <body>
+  
   <div class="dropdown">
-    <button class="dropbtn">Menu</button>
-    <div class="dropdown-content">
-      <buttontop href="#" onclick="showSection('section1')">Evolution de la fortune de quelques familles françaises</buttontop>
-      <buttontop href="#" onclick="showSection('section2')">Evolution du nombre de riches en France</buttontop>
+    <button class="dropbtn" id="dropdownButton">
+      Graphique 1 
+      <span id="dropdownArrow">▼</span>
+    </button>
+    <div class="dropdown-content" id="dropdownContent">
+      <button onclick="selectGraph('Graphique 1', 'section1')">Graphique 1</button>
+      <button onclick="selectGraph('Graphique 2', 'section2')">Graphique 2</button>
     </div>
   </div>
+  
 
   <!-- Section 1 -->
   <section id="section1" class="content-section">
@@ -83,6 +88,36 @@
     }
     toggleDescription('toggle-button1', 'description1');
     toggleDescription('toggle-button2', 'description2');
+
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownContent = document.getElementById('dropdownContent');
+    const dropdownArrow = document.getElementById('dropdownArrow');
+
+    dropdownButton.addEventListener('click', () => {
+      if (dropdownContent.classList.contains('show')) {
+        dropdownContent.classList.remove('show');
+        dropdownArrow.textContent = '▼';
+      } else {
+        dropdownContent.classList.add('show');
+        dropdownArrow.textContent = '▲';
+      }
+    });
+
+    // Fonction pour sélectionner un graphique
+    function selectGraph(title, sectionId) {
+      // Met à jour le titre du menu
+      dropdownButton.childNodes[0].textContent = title;
+
+      // Ferme le menu
+      dropdownContent.classList.remove('show');
+      dropdownArrow.textContent = '▼';
+
+      // Affiche la section sélectionnée
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.getElementById(sectionId).style.display = 'block';
+    }
 
     // Graphique 1
     const lineCtx1 = document.getElementById('lineChart1');
@@ -218,5 +253,6 @@
       plugins: [ChartDataLabels]
     });
   </script>
+  
 </body>
 </html>
