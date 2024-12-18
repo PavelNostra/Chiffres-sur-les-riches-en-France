@@ -1,45 +1,136 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-}
 
-.chart-container {
-    width: 50%;
-    margin: 20px;
-}
+  body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    color: #333;
+  }
 
-#iframe-preview {
-    width: 100%;
-    height: 100%;
-    border
-}
-
-.content {
-    width: 100%;
-    height: 100%;
-}
-
-.mockup-desktop {
-    width: auto;
-    height: auto;
-}
-
-
-.container {
+  #chart-container {
     position: relative;
-    background: #2c3e50;
-    height: 50vh;
+    width: 100%;
+    height: 50vh; /* Le conteneur prend 50% de la hauteur de l'écran */
+    margin: 20px auto;
+    overflow: hidden;
+  }
+
+  #lineChart {
+    max-width: 100%; /* Limite la largeur */
+    height: 100%; /* Utilise toute la hauteur du conteneur */
+  }
+
+  .description {
+    display: none;
+    margin-top: 10px;
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(-10px);
+  }
+
+  .description.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    background-color: #ffefef;
+    border-radius: 15px;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    background-color: #cf403e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', Arial, sans-serif;
   }
   .cssFont_1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 0px;
     word-spacing: 0px;
     color: #000000;
     font-weight: normal;
     text-decoration: none;
+    text-align: left;
     font-style: italic;
     font-variant: normal;
     text-transform: none;
+  }
+  .numero-graphique {
+    position: absolute; /* Positionnement par rapport au conteneur parent */
+    top: 10px; /* Décalage du haut */
+    right: 10px; /* Décalage de la droite */
+    background-color: #fff; /* Fond blanc pour le numéro */
+    color: #cf403e; /* Couleur rouge pour le texte */
+    border: 2px solid #cf403e; /* Bordure rouge */
+    border-radius: 5px; /* Coins arrondis */
+    padding: 5px 8px; /* Réduction de l'espacement interne */
+    font-size: 12px; /* Taille de police réduite */
+    font-weight: bold; /* Texte en gras */
+    z-index: 10; /* Assure que le cadre reste au-dessus du graphique */
+  }
+
+
+  
+
+  button:hover {
+    background-color: #992c2b;
+  }
+
+  button.small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 3vw;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  p, ul {
+    text-align: justify;
+    font-size: 1rem;
+  }
+
+  ul {
+    list-style-type: disc;
+    margin: 10px 0 0 5%;
+    padding-left: 5%;
+  }
+
+  ul li {
+    margin-bottom: 8px;
+  }
+  
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 5vw;
     }
+
+    
+
+    button {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    h1 {
+      font-size: 1.75vw;
+    }
+
+    p, ul {
+      font-size: 1.2rem;
+    }
+  }
+    
   
