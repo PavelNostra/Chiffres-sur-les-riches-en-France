@@ -8,11 +8,13 @@
   <title>Evolution des fortunes en France</title>
 </head>
 <body>
-  <!-- Navigation entre les sections -->
-  <nav>
-    <buttontop onclick="showSection('section1')">Graphique 1</buttontop>
-    <buttontop onclick="showSection('section2')">Graphique 2</buttontop>
-  </nav>
+  <div class="dropdown">
+    <button class="dropbtn">Menu</button>
+    <div class="dropdown-content">
+      <a href="#" onclick="showSection('section1')">Graphique 1</a>
+      <a href="#" onclick="showSection('section2')">Graphique 2</a>
+    </div>
+  </div>
 
   <!-- Section 1 -->
   <section id="section1" class="content-section">
@@ -162,7 +164,57 @@
         labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
         datasets: [{ label: 'milliards', data: [571, 650, 711, 731, 953, 1002, 1170, 1228], borderColor: '#542b6c', backgroundColor: '#e8dff2', tension: 0 }]
       },
-      options: { /* options */ },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom', // Place les légendes en bas
+            labels: {
+              font: {
+                family: 'Montserrat',
+                size: 10
+              },
+              color: '#333',
+              padding: 10 // Espacement entre les légendes
+            },
+            align: 'start' // Centre les légendes
+          },
+          datalabels: {
+            color: 'black',
+            font: {
+              family: 'Montserrat',
+              size: 12
+            
+            },
+            
+            anchor: 'end',
+            align: 'top',
+            offset : -5,
+            
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 0,
+            ticks: {
+              font: {
+                family: 'Montserrat'
+              },
+              color: '#333'
+            }
+          },
+          x: {
+            ticks: {
+              font: {
+                family: 'Montserrat'
+              },
+              color: '#333'
+            }
+          }
+        }
+      },
       plugins: [ChartDataLabels]
     });
   </script>
