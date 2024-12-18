@@ -38,7 +38,7 @@
   }
 
   button {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 1rem 2rem;
     font-size: 1rem;
     background-color: #cf403e;
@@ -48,6 +48,21 @@
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: 'Montserrat', Arial, sans-serif;
+  }
+  buttontop{
+    margin-top: 10px;
+    padding: 0rem 1rem;
+    font-size: 1rem;
+    background-color: #cf403e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', Arial, sans-serif;
+  }
+  buttontop:hover {
+    background-color: #992c2b;
   }
   .cssFont_1 {
     font-family: 'Montserrat', sans-serif;

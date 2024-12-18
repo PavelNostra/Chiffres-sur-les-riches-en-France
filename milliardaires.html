@@ -10,8 +10,8 @@
 <body>
   <!-- Navigation entre les sections -->
   <nav>
-    <button onclick="showSection('section1')">Graphique 1</button>
-    <button onclick="showSection('section2')">Graphique 2</button>
+    <buttontop onclick="showSection('section1')">Graphique 1</buttontop>
+    <buttontop onclick="showSection('section2')">Graphique 2</buttontop>
   </nav>
 
   <!-- Section 1 -->
@@ -96,7 +96,61 @@
           { label: 'Famille Pinault', data: [11.3, 19, 30.5, 29, 32, 41.5, 30.9, 31.2, 23.6], borderColor: '#1f77b4', backgroundColor: '#d4e7f9', tension: 0 }
         ]
       },
-      options: { /* options */ },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom', // Place les légendes en bas
+            labels: {
+              font: {
+                family: 'Montserrat',
+                size: 10
+              },
+              color: '#333',
+              padding: 10 // Espacement entre les légendes
+            },
+            align: 'start' // Centre les légendes
+          },
+          datalabels: {
+            color: 'black',
+            font: {
+              family: 'Montserrat',
+              size: 12
+            
+            },
+            
+            anchor: 'end',
+            align: 'top',
+            offset : -5,
+            formatter: function(value, context) {
+              const dataset = context.dataset.data;
+              return context.dataIndex === dataset.length - 1 ? value : null;
+              
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 0,
+            ticks: {
+              font: {
+                family: 'Montserrat'
+              },
+              color: '#333'
+            }
+          },
+          x: {
+            ticks: {
+              font: {
+                family: 'Montserrat'
+              },
+              color: '#333'
+            }
+          }
+        }
+      },
       plugins: [ChartDataLabels]
     });
 
